@@ -2,12 +2,12 @@
 
 /* eslint-env es6 */
 /* eslint-disable no-console */
-'use strict';
+'use strict'
 
-const md  = require('../')('commonmark');
-const app = require('express')();
+const md = require('../')('commonmark')
+const app = require('express')()
 
-const version = require('../package.json').version;
+const version = require('../package.json').version
 
 const banner = `<!doctype html>
 <html lang="en">
@@ -21,9 +21,9 @@ const banner = `<!doctype html>
   <p>Usage: /?text=...</p>
 </body>
 </html>
-`;
+`
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 5000))
 
 app.get('/', function (req, res) {
   if (typeof req.query.text === 'string') {
@@ -31,13 +31,13 @@ app.get('/', function (req, res) {
       name: 'markdown-it',
       html: md.render(req.query.text.slice(0, 1000)),
       version
-    });
-    return;
+    })
+    return
   }
-  res.setHeader('Content-Type', 'text/html');
-  res.send(banner);
-});
+  res.setHeader('Content-Type', 'text/html')
+  res.send(banner)
+})
 
 app.listen(app.get('port'), function () {
-  console.log(`Node app is running on port ${app.get('port')}`);
-});
+  console.log(`Node app is running on port ${app.get('port')}`)
+})
